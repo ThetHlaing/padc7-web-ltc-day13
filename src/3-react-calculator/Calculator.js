@@ -4,6 +4,7 @@ import math from 'mathjs'
 import './App.css'
 import Display from './Display'
 import Button from './Button'
+import Buttons from './Buttons'
 
 class Calculator extends Component {
   constructor() {
@@ -24,10 +25,12 @@ class Calculator extends Component {
     }
   }
   handleClick = e => {
+    console.log(this.state.operations);
     const value = e.target.getAttribute('data-value')
     switch (value) {
       case 'clear':
         //Clear the state
+        this.setState({ operations: [] });
         break
       case 'equal':
         //Calculate the application
@@ -37,9 +40,12 @@ class Calculator extends Component {
         const newOperations = update(this.state.operations, {
           $push: [value],
         })
+
+        const oldOperation = this.state.operations;
+        oldOperation.push(value);
         
         this.setState({
-          operations: newOperations,
+          operations: oldOperation,
         })
         break
     }
@@ -49,7 +55,7 @@ class Calculator extends Component {
     return (
       <div className="App">
         <Display data={this.state.operations} />
-        <div className="Buttons">
+        <Buttons>
           <Button onClick={this.handleClick} label="C" value="clear" />
           <Button onClick={this.handleClick} label="7" value="7" />
           <Button onClick={this.handleClick} label="4" value="4" />
@@ -60,14 +66,20 @@ class Calculator extends Component {
           <Button onClick={this.handleClick} label="8" value="8" />
           <Button onClick={this.handleClick} label="5" value="5" />
           <Button onClick={this.handleClick} label="2" value="2" />
-          <Button onClick={this.handleClick} label="." value="." />      
+          <Button onClick={this.handleClick} label="." value="." />   
+
+          <Button onClick={this.handleClick} label="x" value="*" /> 
+          <Button onClick={this.handleClick} label="9" value="9" />
+          <Button onClick={this.handleClick} label="6" value="6" />
+          <Button onClick={this.handleClick} label="3" value="3" />    
+          
         
           <Button label="" value="null" />
 
           <Button onClick={this.handleClick} label="-" value="-" />
           <Button onClick={this.handleClick} label="+" size="2" value="+" />
           <Button onClick={this.handleClick} label="=" size="2" value="equal" />
-        </div>
+        </Buttons>
       </div>
     )
   }

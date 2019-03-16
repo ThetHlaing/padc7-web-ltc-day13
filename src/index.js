@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import Exercise from './2-router-exercise/index'
+import BasicExample from './1-router/index';
+import Exercise from './2-router-exercise/index';
 import Calculator from './3-react-calculator/Calculator'
 
 ReactDOM.render(<Calculator />, document.getElementById('root'));
